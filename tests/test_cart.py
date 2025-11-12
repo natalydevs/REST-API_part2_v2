@@ -24,7 +24,6 @@ def test_cart_has_1_item_after_adding_single_product():
     }
 
     with step("Добавить товар в корзину через API"):
-        # лог запроса (консоль + allure)
         print(f"REQUEST: POST {url}\nHEADERS: {headers}\nPAYLOAD: {payload}")
         allure.attach(
             body=f"POST {url}\n\nHEADERS:\n{headers}\n\nPAYLOAD:\n{payload}",
@@ -34,7 +33,6 @@ def test_cart_has_1_item_after_adding_single_product():
 
         response = session.post(url, data=payload, headers=headers)
 
-        # лог ответа
         allure.attach(body=response.text, name="API response", attachment_type=AttachmentType.TEXT)
         assert response.status_code == 200
         assert '"success":true' in response.text.lower()
